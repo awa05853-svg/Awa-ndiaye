@@ -803,8 +803,8 @@ function Contact() {
         </svg>
       ),
       label: "Email",
-      value: "[VOTRE EMAIL]",
-      href: "mailto:[VOTRE_EMAIL]",
+      value: "awa05853@gmail.com",
+      href: "mailto:awa05853@gmail.com",
     },
     {
       icon: (
@@ -813,8 +813,8 @@ function Contact() {
         </svg>
       ),
       label: "Téléphone",
-      value: "[VOTRE TÉLÉPHONE]",
-      href: "tel:[VOTRE_TELEPHONE]",
+      value: "+221 77 171 15 74",
+      href: "tel:+221771711574",
     },
     {
       icon: (
@@ -848,16 +848,32 @@ function Contact() {
             <em className="not-italic text-brand-green">prochain projet.</em>
           </h2>
           <p className="text-gray-400 text-[15px] leading-relaxed max-w-lg mx-auto mb-10">
-            Vous êtes recruteur, client ou partenaire ? Écrivez-moi pour échanger sur une opportunité ou une collaboration.
+            Vous êtes recruteur, client ou partenaire ? Écrivez-moi ou contactez-moi par téléphone pour échanger sur une opportunité ou une collaboration.
           </p>
 
-          <a
-            href="mailto:[VOTRE_EMAIL]"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-brand-green text-white font-medium rounded-full hover:bg-brand-green-dark transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-green focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 active:scale-95 text-[15px] mb-16"
-          >
-            Me contacter
-            <span aria-hidden="true">→</span>
-          </a>
+          <div className="flex flex-wrap items-center justify-center gap-4 mb-16">
+            <a
+              href="mailto:awa05853@gmail.com"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-brand-green text-white font-medium rounded-full hover:bg-brand-green-dark transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-green focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950 active:scale-95 text-[15px]"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+              M&apos;envoyer un email
+            </a>
+            <a
+              href="https://wa.me/221771711574"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-7 py-4 border border-white/15 text-white font-medium rounded-full hover:bg-white/10 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-green active:scale-95 text-[15px]"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+              </svg>
+              WhatsApp
+            </a>
+          </div>
 
           <div className="grid sm:grid-cols-3 gap-4 text-left">
             {infos.map((item) => (
@@ -916,7 +932,7 @@ function Footer() {
             LinkedIn
           </a>
           <a
-            href="[LIEN_GITHUB]"
+            href="https://github.com/awa05853-svg"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 px-4 py-2 border border-white/10 text-gray-400 text-[13px] rounded-full hover:border-brand-green hover:text-brand-green transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-green"
