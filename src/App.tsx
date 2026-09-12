@@ -517,31 +517,332 @@ function Services() {
 
 // ─── Projects ─────────────────────────────────────────────────────────────────
 
+// ─── Projects ─────────────────────────────────────────────────────────────────
+
+interface JefandikooModalProps {
+  isOpen: boolean
+  onClose: () => void
+}
+
+function JefandikooModal({ isOpen, onClose }: JefandikooModalProps) {
+  const [activeTab, setActiveTab] = useState<"all" | "moodboard" | "logos" | "charte">("all")
+  const [lightboxImg, setLightboxImg] = useState<string | null>(null)
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        if (lightboxImg) setLightboxImg(null)
+        else onClose()
+      }
+    }
+    if (isOpen) {
+      document.body.style.overflow = "hidden"
+      window.addEventListener("keydown", handleKeyDown)
+    }
+    return () => {
+      document.body.style.overflow = "unset"
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [isOpen, lightboxImg, onClose])
+
+  if (!isOpen) return null
+
+  const logos = [
+    {
+      src: "/jefandikoo/logo-white.png",
+      label: "Version Standard (Fond Blanc)",
+      bg: "bg-white",
+      desc: "Usage principal pour fonds clairs, documents administratifs et web.",
+    },
+    {
+      src: "/jefandikoo/logo-green.png",
+      label: "Version Inversée (Fond Vert #01B501)",
+      bg: "bg-[#01B501]",
+      desc: "Identité forte sur fond vert naturel — symbole d'agriculture et transformation.",
+    },
+    {
+      src: "/jefandikoo/logo-yellow.png",
+      label: "Version Énergie (Fond Jaune #FFC815)",
+      bg: "bg-[#FFC815]",
+      desc: "Déclinaison chaleureuse et dynamique pour les supports promotionnels.",
+    },
+  ]
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-gray-950/80 backdrop-blur-md overflow-y-auto animate-fadeIn"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-5xl bg-white rounded-3xl shadow-2xl overflow-hidden my-auto border border-gray-100 flex flex-col max-h-[90vh]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="p-6 sm:p-8 bg-gradient-to-r from-gray-900 via-gray-900 to-gray-950 text-white flex items-start justify-between gap-4 border-b border-white/10">
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-[10px] font-semibold tracking-wider uppercase px-2.5 py-0.5 rounded-full bg-brand-green/20 text-brand-green border border-brand-green/30">
+                Identité Visuelle & UX
+              </span>
+              <span className="text-[10px] font-semibold tracking-wider uppercase px-2.5 py-0.5 rounded-full bg-brand-blue/20 text-brand-blue border border-brand-blue/30">
+                Projet Réalisé
+              </span>
+            </div>
+            <h2 id="modal-title" className="font-display text-2xl sm:text-3xl font-semibold tracking-tight text-white flex items-center gap-2">
+              JËFANDIKOO
+              <span className="text-brand-green text-sm font-normal">— Produire. Transformer. Valoriser.</span>
+            </h2>
+            <p className="text-gray-400 text-xs sm:text-sm mt-1 max-w-2xl leading-relaxed">
+              Conception de l&apos;identité graphique, création des déclinaisons de logo et élaboration du moodboard applicatif pour la valorisation agricole et la transformation locale.
+            </p>
+          </div>
+
+          <button
+            onClick={onClose}
+            className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-green shrink-0"
+            aria-label="Fermer la fenêtre"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        {/* Tab filters */}
+        <div className="px-6 sm:px-8 pt-4 pb-2 bg-gray-50 border-b border-gray-100 flex flex-wrap gap-2">
+          {[
+            { id: "all", label: "Vue d'ensemble" },
+            { id: "moodboard", label: "Moodboard Complet" },
+            { id: "logos", label: "Déclinaisons du Logo (3)" },
+            { id: "charte", label: "Charte & Couleurs" },
+          ].map((t) => (
+            <button
+              key={t.id}
+              onClick={() => setActiveTab(t.id as typeof activeTab)}
+              className={`px-4 py-2 text-xs sm:text-[13px] font-medium rounded-full transition-all duration-200 ${
+                activeTab === t.id
+                  ? "bg-brand-green text-white shadow-sm"
+                  : "bg-white text-gray-600 hover:text-gray-900 border border-gray-200"
+              }`}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Modal Body */}
+        <div className="p-6 sm:p-8 overflow-y-auto space-y-8">
+          {/* Section 1: Moodboard */}
+          {(activeTab === "all" || activeTab === "moodboard") && (
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h3 className="font-display font-semibold text-gray-900 text-lg sm:text-xl">
+                    1. Moodboard & Univers Visuel
+                  </h3>
+                  <p className="text-xs sm:text-sm text-gray-500">
+                    Synthèse de l&apos;univers de marque, des modules de l&apos;application (Conservation, Transformation, Ventes) et de l&apos;écosystème agricole.
+                  </p>
+                </div>
+                <a
+                  href="/jefandikoo/moodboard.jpg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-brand-green border border-brand-green/30 hover:bg-brand-green/10 rounded-full transition-colors"
+                >
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                  Ouvrir en haute définition
+                </a>
+              </div>
+
+              <div
+                className="group relative rounded-2xl overflow-hidden border border-gray-200 bg-gray-100 cursor-pointer shadow-sm hover:shadow-md transition-shadow"
+                onClick={() => setLightboxImg("/jefandikoo/moodboard.jpg")}
+              >
+                <img
+                  src="/jefandikoo/moodboard.jpg"
+                  alt="Moodboard officiel Jefandikoo avec charte graphique, interface et photos d'ateliers"
+                  className="w-full h-auto max-h-[520px] object-contain transition-transform duration-500 group-hover:scale-[1.01]"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gray-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                  <span className="px-4 py-2 bg-white/90 backdrop-blur-sm text-gray-900 text-xs font-medium rounded-full shadow-lg">
+                    🔍 Cliquer pour agrandir
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Section 2: Logos */}
+          {(activeTab === "all" || activeTab === "logos") && (
+            <div>
+              <div className="mb-4">
+                <h3 className="font-display font-semibold text-gray-900 text-lg sm:text-xl">
+                  2. Déclinaisons Officielles du Logo
+                </h3>
+                <p className="text-xs sm:text-sm text-gray-500">
+                  Trois variantes adaptées à tous les types de supports physiques, packaging et interfaces numériques.
+                </p>
+              </div>
+
+              <div className="grid sm:grid-cols-3 gap-5">
+                {logos.map((logo, idx) => (
+                  <div
+                    key={idx}
+                    className="group bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col"
+                  >
+                    <div
+                      className={`p-8 ${logo.bg} flex items-center justify-center border-b border-gray-100 min-h-[190px] cursor-pointer relative overflow-hidden`}
+                      onClick={() => setLightboxImg(logo.src)}
+                    >
+                      <img
+                        src={logo.src}
+                        alt={logo.label}
+                        className="w-40 h-auto object-contain transition-transform duration-300 group-hover:scale-110"
+                        loading="lazy"
+                      />
+                      <div className="absolute bottom-2 right-2 px-2 py-1 bg-black/40 text-white text-[10px] rounded backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-opacity">
+                        Agrandir
+                      </div>
+                    </div>
+                    <div className="p-4 flex-1 flex flex-col justify-between">
+                      <div>
+                        <h4 className="font-semibold text-gray-900 text-sm">{logo.label}</h4>
+                        <p className="text-xs text-gray-500 mt-1 leading-relaxed">{logo.desc}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Section 3: Charte Graphique */}
+          {(activeTab === "all" || activeTab === "charte") && (
+            <div className="bg-gray-50 rounded-2xl p-6 sm:p-8 border border-gray-100">
+              <h3 className="font-display font-semibold text-gray-900 text-lg mb-4">
+                3. Palette Chromatique & Intentions UX
+              </h3>
+              <div className="grid sm:grid-cols-3 gap-4 mb-6">
+                <div className="bg-white p-4 rounded-xl border border-gray-200 flex items-center gap-3">
+                  <span className="w-10 h-10 rounded-lg bg-[#01B501] shadow-inner shrink-0" />
+                  <div>
+                    <p className="text-xs font-mono font-bold text-gray-900">#01B501</p>
+                    <p className="text-[11px] text-gray-500">Vert Nature & Écologie</p>
+                  </div>
+                </div>
+                <div className="bg-white p-4 rounded-xl border border-gray-200 flex items-center gap-3">
+                  <span className="w-10 h-10 rounded-lg bg-[#FFC815] shadow-inner shrink-0" />
+                  <div>
+                    <p className="text-xs font-mono font-bold text-gray-900">#FFC815</p>
+                    <p className="text-[11px] text-gray-500">Jaune Énergie & Chaleur</p>
+                  </div>
+                </div>
+                <div className="bg-white p-4 rounded-xl border border-gray-200 flex items-center gap-3">
+                  <span className="w-10 h-10 rounded-lg bg-white border border-gray-300 shadow-inner shrink-0" />
+                  <div>
+                    <p className="text-xs font-mono font-bold text-gray-900">#FFFFFF</p>
+                    <p className="text-[11px] text-gray-500">Blanc Clarté & Simplicité</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid sm:grid-cols-3 gap-3 text-xs text-gray-600">
+                <div className="p-3 bg-white rounded-lg border border-gray-200">
+                  <strong className="text-gray-900 block mb-1">📦 Conservation</strong>
+                  Gestion intuitive des stocks de matières premières récoltées.
+                </div>
+                <div className="p-3 bg-white rounded-lg border border-gray-200">
+                  <strong className="text-gray-900 block mb-1">⚙️ Transformation</strong>
+                  Suivi des étapes machines et contrôle qualité des produits.
+                </div>
+                <div className="p-3 bg-white rounded-lg border border-gray-200">
+                  <strong className="text-gray-900 block mb-1">🛍️ Ventes</strong>
+                  Distribution et valorisation commerciale des produits finis.
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        <div className="p-4 sm:p-5 bg-gray-50 border-t border-gray-100 flex items-center justify-between">
+          <p className="text-xs text-gray-500">Design réalisé par <strong>Awa Ndiaye</strong></p>
+          <button
+            onClick={onClose}
+            className="px-6 py-2 bg-gray-900 text-white text-xs sm:text-sm font-medium rounded-full hover:bg-gray-800 transition-colors"
+          >
+            Fermer
+          </button>
+        </div>
+      </div>
+
+      {/* Lightbox for large single image */}
+      {lightboxImg && (
+        <div
+          className="fixed inset-0 z-60 bg-black/95 flex items-center justify-center p-4"
+          onClick={() => setLightboxImg(null)}
+        >
+          <button
+            onClick={() => setLightboxImg(null)}
+            className="absolute top-5 right-5 p-3 rounded-full bg-white/20 text-white hover:bg-white/30 transition-colors text-sm"
+          >
+            ✕ Fermer l&apos;image
+          </button>
+          <img
+            src={lightboxImg}
+            alt="Agrandissement"
+            className="max-w-full max-h-[92vh] object-contain rounded-lg shadow-2xl"
+          />
+        </div>
+      )}
+    </div>
+  )
+}
+
 function Projects() {
+  const [jefandikooModalOpen, setJefandikooModalOpen] = useState(false)
+
   const projects = [
     {
+      id: "joj",
       num: "01",
       title: "JOJ Dakar 2026",
       tags: ["UX Research", "UX/UI", "Figma"],
       desc: "Analyse de l'expérience utilisateur autour des Jeux Olympiques de la Jeunesse Dakar 2026, avec création de personas, parcours utilisateurs, workflows et wireframes.",
       accent: "green",
       live: true,
+      hasMedia: false,
     },
     {
+      id: "jefandikoo",
       num: "02",
       title: "Jefandikoo",
-      tags: ["Innovation", "UX/UI", "Digital"],
-      desc: "Concept de solution numérique innovante destinée à simplifier les parcours utilisateurs, valoriser les services et offrir une expérience intuitive et accessible.",
-      accent: "blue",
+      subtitle: "Produire · Transformer · Valoriser",
+      tags: ["Identité Visuelle", "Moodboard", "UX/UI", "Logos"],
+      desc: "Conception complète de l'identité de marque, des 3 déclinaisons de logo et du moodboard applicatif dédié à la valorisation agricole et à la transformation locale.",
+      accent: "green",
       live: true,
+      hasMedia: true,
     },
     {
+      id: "jangum-jigeen",
       num: "03",
       title: "Jangum Jigeen",
       tags: ["Éducation", "Digital", "Inclusion"],
       desc: "Initiative et solution numérique axée sur l'apprentissage, le développement des compétences et l'autonomisation des femmes dans l'univers digital.",
-      accent: "green",
+      accent: "blue",
       live: true,
+      hasMedia: false,
     },
   ]
 
@@ -562,17 +863,17 @@ function Projects() {
           </h2>
         </FadeIn>
 
-        <div className="space-y-5">
+        <div className="space-y-6">
           {projects.map((p, i) => (
             <FadeIn key={p.num} delay={i * 80}>
               <article
-                className={`group bg-white rounded-2xl px-7 py-8 md:px-10 md:py-9 border transition-all duration-300 ${
+                className={`group bg-white rounded-3xl p-7 md:p-9 border transition-all duration-300 ${
                   p.live
-                    ? "border-gray-100 hover:border-brand-green/20 hover:shadow-[0_8px_30px_rgba(0,154,68,0.07)]"
+                    ? "border-gray-100 hover:border-brand-green/30 hover:shadow-[0_12px_40px_rgba(0,154,68,0.08)]"
                     : "border-dashed border-gray-200"
                 }`}
               >
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-wrap items-center gap-2.5 mb-3">
                       <span className="font-mono text-[11px] font-medium text-gray-300">{p.num}</span>
@@ -585,26 +886,118 @@ function Projects() {
                         </span>
                       ))}
                     </div>
-                    <h3
-                      className={`font-display font-semibold text-xl sm:text-2xl mb-2 ${p.live ? "text-gray-900" : "text-gray-400"}`}
-                    >
+
+                    <h3 className="font-display font-semibold text-2xl sm:text-[1.7rem] text-gray-900 mb-2 flex items-center gap-2">
                       {p.title}
+                      {"subtitle" in p && p.subtitle && (
+                        <span className="text-xs sm:text-sm font-normal text-brand-green block sm:inline">
+                          — {p.subtitle}
+                        </span>
+                      )}
                     </h3>
-                    <p className="text-[13px] text-gray-400 leading-relaxed max-w-2xl">{p.desc}</p>
+                    <p className="text-[14px] text-gray-500 leading-relaxed max-w-3xl mb-4">{p.desc}</p>
+
+                    {/* Rich Visual Preview for Jefandikoo */}
+                    {p.id === "jefandikoo" && (
+                      <div className="mt-5 pt-5 border-t border-gray-100">
+                        <p className="text-[11px] font-semibold tracking-wider text-gray-400 uppercase mb-3 flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-brand-green" />
+                          Visuels & Déclinaisons créés pour ce projet :
+                        </p>
+
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                          {/* Moodboard preview */}
+                          <div
+                            onClick={() => setJefandikooModalOpen(true)}
+                            className="group/img relative rounded-xl overflow-hidden border border-gray-200 bg-gray-100 h-24 sm:h-28 cursor-pointer hover:shadow-md transition-all duration-200"
+                            title="Cliquer pour afficher le moodboard complet"
+                          >
+                            <img
+                              src="/jefandikoo/moodboard.jpg"
+                              alt="Aperçu Moodboard Jefandikoo"
+                              className="w-full h-full object-cover object-center group-hover/img:scale-105 transition-transform duration-300"
+                              loading="lazy"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2">
+                              <span className="text-[10px] font-medium text-white">Moodboard UX</span>
+                            </div>
+                          </div>
+
+                          {/* Logo 1 */}
+                          <div
+                            onClick={() => setJefandikooModalOpen(true)}
+                            className="group/img relative rounded-xl overflow-hidden border border-gray-200 bg-white h-24 sm:h-28 p-2 flex items-center justify-center cursor-pointer hover:shadow-md transition-all duration-200"
+                            title="Logo Fond Blanc"
+                          >
+                            <img
+                              src="/jefandikoo/logo-white.png"
+                              alt="Logo Jefandikoo Fond Blanc"
+                              className="w-full h-auto max-h-16 object-contain group-hover/img:scale-110 transition-transform duration-300"
+                              loading="lazy"
+                            />
+                            <div className="absolute bottom-1 right-1.5 text-[9px] text-gray-400 font-medium">Fond Blanc</div>
+                          </div>
+
+                          {/* Logo 2 */}
+                          <div
+                            onClick={() => setJefandikooModalOpen(true)}
+                            className="group/img relative rounded-xl overflow-hidden border border-gray-200 bg-[#01B501] h-24 sm:h-28 p-2 flex items-center justify-center cursor-pointer hover:shadow-md transition-all duration-200"
+                            title="Logo Fond Vert"
+                          >
+                            <img
+                              src="/jefandikoo/logo-green.png"
+                              alt="Logo Jefandikoo Fond Vert"
+                              className="w-full h-auto max-h-16 object-contain group-hover/img:scale-110 transition-transform duration-300"
+                              loading="lazy"
+                            />
+                            <div className="absolute bottom-1 right-1.5 text-[9px] text-white/90 font-medium">Fond Vert</div>
+                          </div>
+
+                          {/* Logo 3 */}
+                          <div
+                            onClick={() => setJefandikooModalOpen(true)}
+                            className="group/img relative rounded-xl overflow-hidden border border-gray-200 bg-[#FFC815] h-24 sm:h-28 p-2 flex items-center justify-center cursor-pointer hover:shadow-md transition-all duration-200"
+                            title="Logo Fond Jaune"
+                          >
+                            <img
+                              src="/jefandikoo/logo-yellow.png"
+                              alt="Logo Jefandikoo Fond Jaune"
+                              className="w-full h-auto max-h-16 object-contain group-hover/img:scale-110 transition-transform duration-300"
+                              loading="lazy"
+                            />
+                            <div className="absolute bottom-1 right-1.5 text-[9px] text-gray-900/90 font-medium">Fond Jaune</div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
 
-                  <div className="flex-shrink-0">
+                  <div className="flex-shrink-0 flex lg:flex-col items-start lg:items-end justify-between gap-3">
                     <button
-                      disabled={!p.live}
-                      aria-disabled={!p.live}
-                      className={`inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-medium rounded-full border transition-all duration-200 ${
-                        p.live
-                          ? "border-brand-green text-brand-green hover:bg-brand-green hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-green active:scale-95"
-                          : "border-gray-200 text-gray-300 cursor-not-allowed"
+                      onClick={() => {
+                        if (p.id === "jefandikoo") setJefandikooModalOpen(true)
+                      }}
+                      className={`inline-flex items-center gap-2 px-6 py-3 text-[13px] font-medium rounded-full border transition-all duration-200 shadow-xs ${
+                        p.id === "jefandikoo"
+                          ? "bg-brand-green text-white border-brand-green hover:bg-brand-green-dark active:scale-95 cursor-pointer"
+                          : "border-brand-green text-brand-green hover:bg-brand-green hover:text-white active:scale-95"
                       }`}
                     >
-                      Voir le projet
-                      {p.live && <span aria-hidden="true">→</span>}
+                      {p.id === "jefandikoo" ? (
+                        <>
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21 15 16 10 5 21"></polyline>
+                          </svg>
+                          Voir les visuels & logos
+                        </>
+                      ) : (
+                        <>
+                          Voir le projet
+                          <span aria-hidden="true">→</span>
+                        </>
+                      )}
                     </button>
                   </div>
                 </div>
@@ -613,6 +1006,12 @@ function Projects() {
           ))}
         </div>
       </div>
+
+      {/* Interactive Modal */}
+      <JefandikooModal
+        isOpen={jefandikooModalOpen}
+        onClose={() => setJefandikooModalOpen(false)}
+      />
     </section>
   )
 }
