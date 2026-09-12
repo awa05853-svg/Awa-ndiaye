@@ -809,8 +809,248 @@ function JefandikooModal({ isOpen, onClose }: JefandikooModalProps) {
   )
 }
 
+// ─── Jangum Jigeen Modal ──────────────────────────────────────────────────────
+
+interface JangumJigeenModalProps {
+  isOpen: boolean
+  onClose: () => void
+}
+
+function JangumJigeenModal({ isOpen, onClose }: JangumJigeenModalProps) {
+  const [activeTab, setActiveTab] = useState<"all" | "branding" | "affiches" | "facture">("all")
+  const [lightboxImg, setLightboxImg] = useState<string | null>(null)
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        if (lightboxImg) setLightboxImg(null)
+        else onClose()
+      }
+    }
+    if (isOpen) {
+      document.body.style.overflow = "hidden"
+      window.addEventListener("keydown", handleKeyDown)
+    }
+    return () => {
+      document.body.style.overflow = "unset"
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [isOpen, lightboxImg, onClose])
+
+  if (!isOpen) return null
+
+  const assets = [
+    {
+      id: "branding",
+      category: "branding",
+      title: "Brand Guidelines & Univers Visuel",
+      subtitle: "Logo JJ avec toque d'étudiant, Typographie Poppins, Goodies & Mockups",
+      src: "/jangum-jigeen/brand-guidelines.png",
+      desc: "Charte graphique complète comprenant le logotype JJ, la typographie Poppins, les codes couleurs orange et noir, ainsi que les déclinaisons sur t-shirt, mug, sac, agenda, stylo et ordinateur.",
+    },
+    {
+      id: "affiche1",
+      category: "affiches",
+      title: "Affiche Officielle & Dépliant",
+      subtitle: "« L'éducation d'aujourd'hui, la réussite de demain »",
+      src: "/jangum-jigeen/affiche-mockup.jpg",
+      desc: "Support de communication grand format et dépliant institutionnel promouvant la formation et l'autonomisation des jeunes femmes.",
+    },
+    {
+      id: "affiche2",
+      category: "affiches",
+      title: "Flyer A4 Glossy Promotionnel",
+      subtitle: "« Chaque femme mérite d'apprendre — Éduquer · Inspirer · Instruire · Réussir »",
+      src: "/jangum-jigeen/flyer-mockup.png",
+      desc: "Support visuel percutant mettant en avant les piliers du programme (Éduquer, Inspirer, Instruire, Réussir) et les coordonnées de contact.",
+    },
+    {
+      id: "facture",
+      category: "facture",
+      title: "Facture & Modèle Administratif",
+      subtitle: "« S'inscrire pour s'inspirer, s'inspirer pour réussir »",
+      src: "/jangum-jigeen/facture-mockup.jpg",
+      desc: "Modélisation de la papeterie d'entreprise et des factures officielles avec charte graphique, tableau de prestations (Formation, Atelier, Accompagnement) et conditions de paiement.",
+    },
+  ]
+
+  const filteredAssets =
+    activeTab === "all" ? assets : assets.filter((a) => a.category === activeTab)
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title-jj"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-gray-950/80 backdrop-blur-md overflow-y-auto animate-fadeIn"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-5xl bg-white rounded-3xl shadow-2xl overflow-hidden my-auto border border-gray-100 flex flex-col max-h-[90vh]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="p-6 sm:p-8 bg-gradient-to-r from-gray-900 via-gray-900 to-gray-950 text-white flex items-start justify-between gap-4 border-b border-white/10">
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-[10px] font-semibold tracking-wider uppercase px-2.5 py-0.5 rounded-full bg-brand-blue/20 text-brand-blue border border-brand-blue/30">
+                Branding & Communication
+              </span>
+              <span className="text-[10px] font-semibold tracking-wider uppercase px-2.5 py-0.5 rounded-full bg-brand-green/20 text-brand-green border border-brand-green/30">
+                4 Supports Réalisés
+              </span>
+            </div>
+            <h2 id="modal-title-jj" className="font-display text-2xl sm:text-3xl font-semibold tracking-tight text-white flex items-center gap-2">
+              JANGUM JIGEEN
+              <span className="text-brand-blue text-sm font-normal">— Éduquer · Inspirer · Instruire · Réussir</span>
+            </h2>
+            <p className="text-gray-400 text-xs sm:text-sm mt-1 max-w-2xl leading-relaxed">
+              Création complète de l&apos;identité visuelle, charte graphique Poppins, 2 affiches de communication et modélisation des documents administratifs et factures.
+            </p>
+          </div>
+
+          <button
+            onClick={onClose}
+            className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-gray-300 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue shrink-0"
+            aria-label="Fermer la fenêtre"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        {/* Tab filters */}
+        <div className="px-6 sm:px-8 pt-4 pb-2 bg-gray-50 border-b border-gray-100 flex flex-wrap gap-2">
+          {[
+            { id: "all", label: "Tous les supports (4)" },
+            { id: "branding", label: "Brand Guidelines" },
+            { id: "affiches", label: "Affiches & Flyers (2)" },
+            { id: "facture", label: "Facture & Papeterie" },
+          ].map((t) => (
+            <button
+              key={t.id}
+              onClick={() => setActiveTab(t.id as typeof activeTab)}
+              className={`px-4 py-2 text-xs sm:text-[13px] font-medium rounded-full transition-all duration-200 ${
+                activeTab === t.id
+                  ? "bg-brand-blue text-white shadow-sm"
+                  : "bg-white text-gray-600 hover:text-gray-900 border border-gray-200"
+              }`}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Modal Body */}
+        <div className="p-6 sm:p-8 overflow-y-auto space-y-8">
+          <div className="grid md:grid-cols-2 gap-6">
+            {filteredAssets.map((asset) => (
+              <div
+                key={asset.id}
+                className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-md transition-shadow flex flex-col"
+              >
+                <div
+                  className="group/img relative bg-gray-100 h-64 sm:h-72 cursor-pointer flex items-center justify-center overflow-hidden border-b border-gray-100"
+                  onClick={() => setLightboxImg(asset.src)}
+                >
+                  <img
+                    src={asset.src}
+                    alt={asset.title}
+                    className="w-full h-full object-contain p-2 group-hover/img:scale-[1.03] transition-transform duration-500"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gray-950/25 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                    <span className="px-4 py-2 bg-white/95 backdrop-blur-sm text-gray-900 text-xs font-medium rounded-full shadow-lg">
+                      🔍 Agrandir en haute définition
+                    </span>
+                  </div>
+                </div>
+                <div className="p-5 flex-1 flex flex-col justify-between bg-white">
+                  <div>
+                    <h3 className="font-display font-semibold text-gray-900 text-base sm:text-lg">
+                      {asset.title}
+                    </h3>
+                    <p className="text-xs font-medium text-brand-blue mt-0.5">{asset.subtitle}</p>
+                    <p className="text-xs text-gray-500 mt-2 leading-relaxed">{asset.desc}</p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between">
+                    <button
+                      onClick={() => setLightboxImg(asset.src)}
+                      className="text-xs font-medium text-brand-blue hover:text-brand-blue transition-colors inline-flex items-center gap-1"
+                    >
+                      Afficher en plein écran
+                      <span aria-hidden="true">→</span>
+                    </button>
+                    <a
+                      href={asset.src}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[11px] text-gray-400 hover:text-gray-600 underline"
+                    >
+                      Ouvrir le fichier original
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Guidelines info card */}
+          <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+              <h4 className="font-display font-semibold text-gray-900 text-sm sm:text-base">
+                Charte Graphique Jangum Jigeen
+              </h4>
+              <p className="text-xs text-gray-500 mt-0.5">
+                Typographie principale : <strong>Poppins</strong> · Palette de marque : <strong>Orange Dynamique & Noir Élégance</strong>.
+              </p>
+            </div>
+            <span className="text-xs font-semibold px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 shrink-0">
+              🎓 Autonomisation Féminine & Digital
+            </span>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="p-4 sm:p-5 bg-gray-50 border-t border-gray-100 flex items-center justify-between">
+          <p className="text-xs text-gray-500">Design réalisé par <strong>Awa Ndiaye</strong></p>
+          <button
+            onClick={onClose}
+            className="px-6 py-2 bg-gray-900 text-white text-xs sm:text-sm font-medium rounded-full hover:bg-gray-800 transition-colors"
+          >
+            Fermer
+          </button>
+        </div>
+      </div>
+
+      {/* Lightbox for large single image */}
+      {lightboxImg && (
+        <div
+          className="fixed inset-0 z-60 bg-black/95 flex items-center justify-center p-4"
+          onClick={() => setLightboxImg(null)}
+        >
+          <button
+            onClick={() => setLightboxImg(null)}
+            className="absolute top-5 right-5 p-3 rounded-full bg-white/20 text-white hover:bg-white/30 transition-colors text-sm"
+          >
+            ✕ Fermer l&apos;image
+          </button>
+          <img
+            src={lightboxImg}
+            alt="Agrandissement"
+            className="max-w-full max-h-[92vh] object-contain rounded-lg shadow-2xl"
+          />
+        </div>
+      )}
+    </div>
+  )
+}
+
 function Projects() {
   const [jefandikooModalOpen, setJefandikooModalOpen] = useState(false)
+  const [jangumJigeenModalOpen, setJangumJigeenModalOpen] = useState(false)
 
   const projects = [
     {
@@ -838,11 +1078,12 @@ function Projects() {
       id: "jangum-jigeen",
       num: "03",
       title: "Jangum Jigeen",
-      tags: ["Éducation", "Digital", "Inclusion"],
-      desc: "Initiative et solution numérique axée sur l'apprentissage, le développement des compétences et l'autonomisation des femmes dans l'univers digital.",
+      subtitle: "Éduquer · Inspirer · Instruire · Réussir",
+      tags: ["Brand Guidelines", "Affiches", "Papeterie", "Design"],
+      desc: "Conception complète de l'identité visuelle de Jangum Jigeen (Brand Guidelines, typographie Poppins, déclinaisons), création de 2 affiches et modélisation de la facture officielle.",
       accent: "blue",
       live: true,
-      hasMedia: false,
+      hasMedia: true,
     },
   ]
 
@@ -890,7 +1131,7 @@ function Projects() {
                     <h3 className="font-display font-semibold text-2xl sm:text-[1.7rem] text-gray-900 mb-2 flex items-center gap-2">
                       {p.title}
                       {"subtitle" in p && p.subtitle && (
-                        <span className="text-xs sm:text-sm font-normal text-brand-green block sm:inline">
+                        <span className={`text-xs sm:text-sm font-normal block sm:inline ${p.accent === "green" ? "text-brand-green" : "text-brand-blue"}`}>
                           — {p.subtitle}
                         </span>
                       )}
@@ -970,16 +1211,99 @@ function Projects() {
                         </div>
                       </div>
                     )}
+
+                    {/* Rich Visual Preview for Jangum Jigeen */}
+                    {p.id === "jangum-jigeen" && (
+                      <div className="mt-5 pt-5 border-t border-gray-100">
+                        <p className="text-[11px] font-semibold tracking-wider text-gray-400 uppercase mb-3 flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-brand-blue" />
+                          4 Supports créés (Brand Guidelines, 2 Affiches, Facture) :
+                        </p>
+
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                          {/* Brand Guidelines */}
+                          <div
+                            onClick={() => setJangumJigeenModalOpen(true)}
+                            className="group/img relative rounded-xl overflow-hidden border border-gray-200 bg-gray-50 h-24 sm:h-28 cursor-pointer hover:shadow-md transition-all duration-200"
+                            title="Cliquer pour afficher la charte graphique Jangum Jigeen"
+                          >
+                            <img
+                              src="/jangum-jigeen/brand-guidelines.png"
+                              alt="Brand Guidelines Jangum Jigeen"
+                              className="w-full h-full object-cover object-top group-hover/img:scale-105 transition-transform duration-300"
+                              loading="lazy"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent flex items-end p-2">
+                              <span className="text-[10px] font-medium text-white">Brand Guidelines</span>
+                            </div>
+                          </div>
+
+                          {/* Affiche 1 */}
+                          <div
+                            onClick={() => setJangumJigeenModalOpen(true)}
+                            className="group/img relative rounded-xl overflow-hidden border border-gray-200 bg-gray-50 h-24 sm:h-28 cursor-pointer hover:shadow-md transition-all duration-200"
+                            title="Affiche Officielle & Dépliant"
+                          >
+                            <img
+                              src="/jangum-jigeen/affiche-mockup.jpg"
+                              alt="Affiche Officielle Jangum Jigeen"
+                              className="w-full h-full object-cover object-center group-hover/img:scale-105 transition-transform duration-300"
+                              loading="lazy"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent flex items-end p-2">
+                              <span className="text-[10px] font-medium text-white">Affiche Dépliant</span>
+                            </div>
+                          </div>
+
+                          {/* Flyer A4 */}
+                          <div
+                            onClick={() => setJangumJigeenModalOpen(true)}
+                            className="group/img relative rounded-xl overflow-hidden border border-gray-200 bg-gray-50 h-24 sm:h-28 cursor-pointer hover:shadow-md transition-all duration-200"
+                            title="Flyer A4 Glossy"
+                          >
+                            <img
+                              src="/jangum-jigeen/flyer-mockup.png"
+                              alt="Flyer A4 Jangum Jigeen"
+                              className="w-full h-full object-cover object-center group-hover/img:scale-105 transition-transform duration-300"
+                              loading="lazy"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent flex items-end p-2">
+                              <span className="text-[10px] font-medium text-white">Flyer A4 Glossy</span>
+                            </div>
+                          </div>
+
+                          {/* Facture */}
+                          <div
+                            onClick={() => setJangumJigeenModalOpen(true)}
+                            className="group/img relative rounded-xl overflow-hidden border border-gray-200 bg-gray-50 h-24 sm:h-28 cursor-pointer hover:shadow-md transition-all duration-200"
+                            title="Facture & Papeterie"
+                          >
+                            <img
+                              src="/jangum-jigeen/facture-mockup.jpg"
+                              alt="Facture Mockup Jangum Jigeen"
+                              className="w-full h-full object-cover object-top group-hover/img:scale-105 transition-transform duration-300"
+                              loading="lazy"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent flex items-end p-2">
+                              <span className="text-[10px] font-medium text-white">Facture Papeterie</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex-shrink-0 flex lg:flex-col items-start lg:items-end justify-between gap-3">
                     <button
                       onClick={() => {
                         if (p.id === "jefandikoo") setJefandikooModalOpen(true)
+                        if (p.id === "jangum-jigeen") setJangumJigeenModalOpen(true)
                       }}
                       className={`inline-flex items-center gap-2 px-6 py-3 text-[13px] font-medium rounded-full border transition-all duration-200 shadow-xs ${
                         p.id === "jefandikoo"
                           ? "bg-brand-green text-white border-brand-green hover:bg-brand-green-dark active:scale-95 cursor-pointer"
+                          : p.id === "jangum-jigeen"
+                          ? "bg-brand-blue text-white border-brand-blue hover:opacity-90 active:scale-95 cursor-pointer"
                           : "border-brand-green text-brand-green hover:bg-brand-green hover:text-white active:scale-95"
                       }`}
                     >
@@ -991,6 +1315,15 @@ function Projects() {
                             <polyline points="21 15 16 10 5 21"></polyline>
                           </svg>
                           Voir les visuels & logos
+                        </>
+                      ) : p.id === "jangum-jigeen" ? (
+                        <>
+                          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                            <polyline points="21 15 16 10 5 21"></polyline>
+                          </svg>
+                          Voir les 4 réalisations
                         </>
                       ) : (
                         <>
@@ -1007,10 +1340,14 @@ function Projects() {
         </div>
       </div>
 
-      {/* Interactive Modal */}
+      {/* Interactive Modals */}
       <JefandikooModal
         isOpen={jefandikooModalOpen}
         onClose={() => setJefandikooModalOpen(false)}
+      />
+      <JangumJigeenModal
+        isOpen={jangumJigeenModalOpen}
+        onClose={() => setJangumJigeenModalOpen(false)}
       />
     </section>
   )
