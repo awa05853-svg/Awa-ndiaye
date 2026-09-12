@@ -529,7 +529,7 @@ function Projects() {
     },
     {
       num: "02",
-      title: "DENTIALMA",
+      title: "Jefandikoo",
       tags: ["Innovation", "UX/UI", "Digital"],
       desc: "Concept de solution numérique innovante destinée à simplifier les parcours utilisateurs, valoriser les services et offrir une expérience intuitive et accessible.",
       accent: "blue",
@@ -537,11 +537,11 @@ function Projects() {
     },
     {
       num: "03",
-      title: "Projet à compléter",
-      tags: ["Design", "Communication digitale"],
-      desc: "Placeholder destiné à accueillir une future réalisation professionnelle, académique ou personnelle.",
-      accent: "gray",
-      live: false,
+      title: "Jangum Jigeen",
+      tags: ["Éducation", "Digital", "Inclusion"],
+      desc: "Initiative et solution numérique axée sur l'apprentissage, le développement des compétences et l'autonomisation des femmes dans l'univers digital.",
+      accent: "green",
+      live: true,
     },
   ]
 
