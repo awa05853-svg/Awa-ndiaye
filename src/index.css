@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Outfit:wght@300;400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-body: 'Outfit', sans-serif;
+  --font-display: 'Fraunces', serif;
+
+  --color-brand-green: #009A44;
+  --color-brand-green-dark: #007a36;
+  --color-brand-red: #CE1126;
+  --color-brand-blue: #0085C7;
+  --color-brand-blue-dark: #006ba0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

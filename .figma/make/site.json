@@ -1,0 +1,10 @@
+{
+  "description": "Create stunning professional portfolios with this intuitive web app designed for UI/UX designers and frontend developers to showcase their work effectively.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
