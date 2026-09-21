@@ -1,7 +1,9 @@
 {
-  "description": "Create stunning professional portfolios with this intuitive web app designed for UI/UX designers and frontend developers to showcase their work effectively.",
+  "title": "Awa Ndiaye — Assistante digitale | UX/UI & Design",
+  "description": "Portfolio professionnel d'Awa Ndiaye, Assistante digitale spécialisée en UX/UI, design numérique et gestion de projet.",
+  "language": "fr",
   "robots": {
-    "index": false
+    "index": true
   },
   "accessibility": {
     "addBypassLinks": false,

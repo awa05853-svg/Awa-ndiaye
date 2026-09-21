@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, ReactNode } from "react"
 import profilePhoto from "./assets/profile.jpeg"
+import hackeusePhoto from "./assets/hackeuse-de-la-semaine.jpeg"
 
 // ─── Scroll animation wrapper ───────────────────────────────────────────────
 
@@ -82,6 +83,7 @@ function Navbar() {
     { label: "Services", id: "services" },
     { label: "Projets", id: "projets" },
     { label: "Parcours", id: "parcours" },
+    { label: "Témoignage", id: "temoignages" },
     { label: "Contact", id: "contact" },
   ]
 
@@ -1542,34 +1544,174 @@ function Parcours() {
   )
 }
 
-// ─── Testimonials ─────────────────────────────────────────────────────────────
+// ─── Testimonials / Distinctions ──────────────────────────────────────────────
 
 function Testimonials() {
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+
+  const qualities = [
+    "Simple",
+    "Modeste",
+    "Sincère",
+    "Honnête",
+    "Curieuse",
+    "Déterminée",
+    "Persévérante",
+    "Bienveillante",
+    "Humble",
+    "Authentique",
+    "Positive",
+    "Résiliente",
+  ]
+
   return (
-    <section id="temoignages" className="py-24 bg-white">
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 text-center">
+    <section id="temoignages" className="py-24 bg-white relative overflow-hidden">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <FadeIn>
-          <div className="inline-flex items-center justify-center gap-2 mb-4">
-            <span className="w-8 h-px bg-brand-green" aria-hidden="true" />
-            <p className="text-[11px] font-semibold tracking-[0.18em] text-brand-green uppercase">
-              Témoignages
-            </p>
-            <span className="w-8 h-px bg-brand-green" aria-hidden="true" />
+          <SectionLabel>Reconnaissance · Témoignage</SectionLabel>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+            <div>
+              <h2 className="font-display text-3xl md:text-[2.4rem] font-semibold text-gray-900 leading-tight">
+                Mise en lumière :{" "}
+                <em className="not-italic text-brand-blue">Hackeuse de la semaine.</em>
+              </h2>
+              <p className="text-gray-500 text-sm sm:text-[15px] mt-2 max-w-2xl">
+                Distinction officielle décernée par <strong>Digital Nisa</strong> (Promotion 5) en partenariat avec <strong>Sonatel Academy &amp; Orange Digital Center</strong>.
+              </p>
+            </div>
+            <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-brand-green/10 text-brand-green border border-brand-green/20 text-xs font-semibold self-start md:self-auto">
+              <span>🌟</span> Distinction d&apos;excellence
+            </span>
           </div>
-          <h2 className="font-display text-3xl md:text-[2.4rem] font-semibold text-gray-900 mb-8">
-            Ce qu&apos;on dit de mon travail.
-          </h2>
-          <div className="inline-flex items-center gap-4 bg-gray-50 border border-dashed border-gray-200 rounded-2xl px-8 py-6 mx-auto">
-            <span className="text-2xl text-brand-green/40" aria-hidden="true">✦</span>
-            <p className="text-[14px] text-gray-400 italic">
-              Des témoignages seront ajoutés prochainement.
-            </p>
+        </FadeIn>
+
+        <FadeIn delay={100}>
+          <div className="relative rounded-3xl bg-gradient-to-br from-[#19153d] via-[#141033] to-[#0c0924] text-white p-6 sm:p-10 lg:p-12 border border-white/10 shadow-[0_20px_50px_rgba(20,16,51,0.25)] overflow-hidden">
+            {/* Ambient background glows */}
+            <div className="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-brand-blue/20 blur-3xl pointer-events-none" aria-hidden="true" />
+            <div className="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-brand-green/15 blur-3xl pointer-events-none" aria-hidden="true" />
+
+            <div className="relative z-10 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              {/* Left Column: Poster preview */}
+              <div className="lg:col-span-5 flex flex-col items-center">
+                <div
+                  onClick={() => setLightboxOpen(true)}
+                  className="group relative cursor-pointer w-full max-w-[320px] rounded-2xl overflow-hidden border-2 border-white/15 bg-gray-900 shadow-2xl transition-all duration-300 hover:border-brand-green/50 hover:scale-[1.02]"
+                  title="Cliquer pour agrandir l'affiche officielle"
+                >
+                  <img
+                    src={hackeusePhoto}
+                    alt="Affiche officielle Digital Nisa - Awa Ndiaye Hackeuse de la semaine"
+                    className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <span className="px-4 py-2 bg-white/95 text-gray-900 text-xs font-semibold rounded-full shadow-lg flex items-center gap-1.5">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="11" y1="8" x2="11" y2="14"></line>
+                        <line x1="8" y1="11" x2="14" y2="11"></line>
+                      </svg>
+                      Agrandir l&apos;affiche
+                    </span>
+                  </div>
+                </div>
+
+                <p className="text-[11px] text-gray-400 mt-3 text-center flex items-center gap-1">
+                  <span>🔍</span> Cliquez sur l&apos;image pour voir en haute résolution
+                </p>
+              </div>
+
+              {/* Right Column: Coach review & text */}
+              <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
+                <div>
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="px-3 py-1 rounded-full bg-white/10 text-white text-[11px] font-semibold tracking-wider uppercase border border-white/10">
+                      Digital Nisa · Promotion 5
+                    </span>
+                    <span className="text-amber-400 text-sm">★★★★★</span>
+                  </div>
+
+                  {/* Quote block */}
+                  <blockquote className="space-y-4 text-gray-200 text-[15px] sm:text-base leading-relaxed">
+                    <p className="italic">
+                      « Chez <strong>Digital Nisa</strong>, nous mettons à l&apos;honneur les hackeuses qui se distinguent par leur engagement, leur évolution et les valeurs qu&apos;elles incarnent.
+                    </p>
+                    <p className="italic">
+                      Cette semaine, découvrez <strong>Awa Ndiaye</strong>, hackeuse de la <strong>Promotion 5</strong>, reconnue pour sa simplicité, son authenticité et sa détermination à toujours aller de l&apos;avant. Toujours prête à apprendre et à relever de nouveaux défis, Awa avance avec humilité, persévérance et une attitude positive. Son parcours reflète une conviction forte : <em>chaque effort est une étape vers la réussite</em>. »
+                    </p>
+                  </blockquote>
+                </div>
+
+                {/* Qualities chips */}
+                <div className="pt-2">
+                  <p className="text-[11px] font-semibold uppercase tracking-wider text-gray-400 mb-2.5">
+                    Valeurs &amp; Qualités reconnues par l&apos;équipe pédagogique :
+                  </p>
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                    {qualities.map((q) => (
+                      <span
+                        key={q}
+                        className="text-xs px-3 py-1 rounded-full bg-white/8 text-gray-200 border border-white/10 hover:border-brand-green/40 hover:bg-brand-green/10 transition-colors"
+                      >
+                        ✨ {q}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Footer attribution */}
+                <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-brand-blue/30 border border-brand-blue/50 flex items-center justify-center text-white font-bold text-sm">
+                      DN
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-white">Coach &amp; Équipe Digital Nisa</p>
+                      <p className="text-xs text-gray-400">Sonatel Academy · Orange Digital Center</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 text-[11px] text-gray-400 flex-wrap">
+                    <span>#DigitalNisa</span>
+                    <span>•</span>
+                    <span>#HackeusesP5</span>
+                    <span>•</span>
+                    <span>#WomenInTech</span>
+                    <span>•</span>
+                    <span>#Inspiration</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </FadeIn>
       </div>
+
+      {/* Lightbox modal for poster */}
+      {lightboxOpen && (
+        <div
+          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4 backdrop-blur-md"
+          onClick={() => setLightboxOpen(false)}
+        >
+          <button
+            onClick={() => setLightboxOpen(false)}
+            className="absolute top-5 right-5 p-3 rounded-full bg-white/20 text-white hover:bg-white/30 transition-colors text-sm"
+          >
+            ✕ Fermer
+          </button>
+          <img
+            src={hackeusePhoto}
+            alt="Affiche Awa Ndiaye Hackeuse de la Semaine Digital Nisa"
+            className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-2xl"
+          />
+        </div>
+      )}
     </section>
   )
 }
+
 
 // ─── Contact ──────────────────────────────────────────────────────────────────
 
