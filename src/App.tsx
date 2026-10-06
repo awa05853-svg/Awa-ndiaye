@@ -5,25 +5,21 @@ import profilePhoto from "./assets/profile.jpeg"
 import hackeusePhoto from "./assets/hackeuse-de-la-semaine.jpeg"
 import cvPdf from "./assets/CV_Awa_Ndiaye.pdf"
 
-// Jefandikoo assets
+// Jefandikoo assets (selected by user: Moodboard, 3 Logos, Badge, Casquette, Tasse, Brouette)
 import jefandikooMoodboard from "./assets/jefandikoo/moodboard.jpg"
 import jefandikooLogoWhite from "./assets/jefandikoo/logo-white.png"
 import jefandikooLogoGreen from "./assets/jefandikoo/logo-green.png"
 import jefandikooLogoYellow from "./assets/jefandikoo/logo-yellow.png"
-import jefandikooTelephone from "./assets/jefandikoo/telephone.png"
 import jefandikooBadge from "./assets/jefandikoo/badge.png"
 import jefandikooCasquette from "./assets/jefandikoo/casquette.png"
 import jefandikooTasse from "./assets/jefandikoo/tasse.png"
-import jefandikooCarteVisite from "./assets/jefandikoo/carte-visite.png"
 import jefandikooBrouette from "./assets/jefandikoo/brouette.jpg"
 
-// Jangum Jigeen assets
-import jangumBrandGuidelines from "./assets/jangum-jigeen/brand-guidelines.png"
+// Jangum Jigeen assets (selected by user: 2 Affiches, Facture, Carte de visite)
 import jangumAfficheMockup from "./assets/jangum-jigeen/affiche-mockup.jpg"
 import jangumFlyerMockup from "./assets/jangum-jigeen/flyer-mockup.png"
 import jangumFactureMockup from "./assets/jangum-jigeen/facture-mockup.jpg"
 import jangumCarteVisite from "./assets/jangum-jigeen/carte-visite.png"
-import jangumKakemono from "./assets/jangum-jigeen/kakemono.jpg"
 
 // ─── Scroll animation wrapper ───────────────────────────────────────────────
 
@@ -295,9 +291,9 @@ function Hero() {
             <p className="text-[15px] md:text-base text-gray-500 leading-relaxed max-w-md">
               Bonjour, je suis{" "}
               <strong className="text-gray-700 font-medium">Awa Ndiaye</strong>.
-              Assistante digitale et designer, je conçois des identités de marque,
-              des supports visuels et des solutions numériques centrées sur les
-              besoins réels des utilisateurs.
+              Assistante digitale et designer, je conçois des identités visuelles,
+              des supports de communication et des solutions numériques centrées sur
+              les besoins réels des utilisateurs.
             </p>
           </FadeIn>
           <FadeIn delay={240}>
@@ -420,7 +416,7 @@ function Hero() {
 function About() {
   const indicators = [
     { label: "UX/UI", desc: "Conception centrée utilisateur", accent: "green" },
-    { label: "Digital", desc: "Outils et contenus numériques", accent: "blue" },
+    { label: "Digital", desc: "Outils et contenus visuels", accent: "blue" },
     { label: "Projet", desc: "Organisation et collaboration", accent: "green" },
   ]
 
@@ -592,7 +588,7 @@ function Skills() {
     {
       num: "02",
       title: "Design digital",
-      desc: "Création de supports visuels, charte graphique, hiérarchie de l'information et mockups.",
+      desc: "Création de supports visuels, charte graphique, hiérarchie de l'information et affiches.",
       Icon: DesignIcon,
       accent: "blue",
     },
@@ -717,7 +713,7 @@ function Services() {
     },
     {
       num: "02",
-      title: "Design digital & Branding",
+      title: "Design digital & Communication",
       desc: "Création d'identités visuelles, logos, affiches, dépliants, papeterie et goodies personnalisés.",
       Icon: BrushIcon,
     },
@@ -954,7 +950,7 @@ interface JefandikooModalProps {
 
 function JefandikooModal({ isOpen, onClose }: JefandikooModalProps) {
   const [activeTab, setActiveTab] = useState<
-    "all" | "moodboard" | "logos" | "mockups" | "charte"
+    "all" | "moodboard" | "logos" | "goodies" | "charte"
   >("all")
   const [lightboxImg, setLightboxImg] = useState<{ src: string; title: string } | null>(
     null
@@ -1000,21 +996,11 @@ function JefandikooModal({ isOpen, onClose }: JefandikooModalProps) {
     },
   ]
 
-  const mockups = [
-    {
-      src: jefandikooTelephone,
-      title: "Application Mobile (Smartphone UI)",
-      subtitle: "Interface de gestion des stocks et commandes agricoles",
-    },
-    {
-      src: jefandikooCarteVisite,
-      title: "Carte de Visite Professionnelle",
-      subtitle: "Papeterie corporative recto-verso Jëfandikoo",
-    },
+  const goodies = [
     {
       src: jefandikooBadge,
       title: "Badge Professionnel & Événementiel",
-      subtitle: "Identification des équipes terrain et ateliers",
+      subtitle: "Identification des équipes terrain et ateliers de transformation",
     },
     {
       src: jefandikooCasquette,
@@ -1053,7 +1039,7 @@ function JefandikooModal({ isOpen, onClose }: JefandikooModalProps) {
                 Identité Visuelle & UX
               </span>
               <span className="text-[10px] font-semibold tracking-wider uppercase px-2.5 py-0.5 rounded-full bg-brand-blue/20 text-brand-blue border border-brand-blue/30">
-                10 Visuels & Supports
+                8 Visuels & Déclinaisons
               </span>
             </div>
             <h2
@@ -1067,9 +1053,9 @@ function JefandikooModal({ isOpen, onClose }: JefandikooModalProps) {
             </h2>
             <p className="text-gray-400 text-xs sm:text-sm mt-1 max-w-2xl leading-relaxed">
               Conception complète de l&apos;identité graphique, création des
-              déclinaisons de logos, élaboration du moodboard applicatif, maquettes
-              mobiles et modélisation de goodies personnalisés (badges, casquettes,
-              tasses, papeterie).
+              déclinaisons de logos (blanc, vert, jaune), élaboration du moodboard
+              applicatif et modélisation des goodies personnalisés (badges, casquettes,
+              tasses, brouette).
             </p>
           </div>
 
@@ -1097,10 +1083,10 @@ function JefandikooModal({ isOpen, onClose }: JefandikooModalProps) {
         {/* Tab filters */}
         <div className="px-6 sm:px-8 pt-4 pb-2 bg-gray-50 border-b border-gray-100 flex flex-wrap gap-2">
           {[
-            { id: "all", label: "Vue d'ensemble" },
+            { id: "all", label: "Vue d'ensemble (8)" },
             { id: "moodboard", label: "Moodboard Complet" },
             { id: "logos", label: "Déclinaisons du Logo (3)" },
-            { id: "mockups", label: "Mockups & Application (6)" },
+            { id: "goodies", label: "Goodies & Mockups (4)" },
             { id: "charte", label: "Charte & Couleurs" },
           ].map((t) => (
             <button
@@ -1221,21 +1207,21 @@ function JefandikooModal({ isOpen, onClose }: JefandikooModalProps) {
             </div>
           )}
 
-          {/* Section 3: Mockups & Application */}
-          {(activeTab === "all" || activeTab === "mockups") && (
+          {/* Section 3: Goodies & Mockups */}
+          {(activeTab === "all" || activeTab === "goodies") && (
             <div>
               <div className="mb-4">
                 <h3 className="font-display font-semibold text-gray-900 text-lg sm:text-xl">
-                  3. Application Mobile & Goodies de Marque
+                  3. Goodies & Supports de Marque
                 </h3>
                 <p className="text-xs sm:text-sm text-gray-500">
-                  Modélisations 3D, maquettes d&apos;interface mobile et déclinaisons
-                  sur supports physiques.
+                  Déclinaisons sur supports physiques et équipements aux couleurs de
+                  la marque.
                 </p>
               </div>
 
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                {mockups.map((m, idx) => (
+              <div className="grid sm:grid-cols-2 gap-5">
+                {goodies.map((m, idx) => (
                   <div
                     key={idx}
                     className="group bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-md transition-shadow flex flex-col cursor-pointer"
@@ -1243,7 +1229,7 @@ function JefandikooModal({ isOpen, onClose }: JefandikooModalProps) {
                       setLightboxImg({ src: m.src, title: m.title })
                     }
                   >
-                    <div className="relative bg-gray-100 h-52 flex items-center justify-center p-3 overflow-hidden border-b border-gray-100">
+                    <div className="relative bg-gray-100 h-56 flex items-center justify-center p-3 overflow-hidden border-b border-gray-100">
                       <img
                         src={m.src}
                         alt={m.title}
@@ -1388,7 +1374,7 @@ interface JangumJigeenModalProps {
 
 function JangumJigeenModal({ isOpen, onClose }: JangumJigeenModalProps) {
   const [activeTab, setActiveTab] = useState<
-    "all" | "branding" | "affiches" | "papeterie"
+    "all" | "affiches" | "papeterie"
   >("all")
   const [lightboxImg, setLightboxImg] = useState<{ src: string; title: string } | null>(
     null
@@ -1415,15 +1401,6 @@ function JangumJigeenModal({ isOpen, onClose }: JangumJigeenModalProps) {
 
   const assets = [
     {
-      id: "branding",
-      category: "branding",
-      title: "Brand Guidelines & Univers Visuel",
-      subtitle:
-        "Logo JJ avec toque d'étudiante, Typographie Poppins, Goodies & Mockups",
-      src: jangumBrandGuidelines,
-      desc: "Charte graphique complète comprenant le logotype JJ, la typographie Poppins, les codes couleurs orange et noir, ainsi que les déclinaisons sur t-shirt, mug, sac, agenda, stylo et ordinateur.",
-    },
-    {
       id: "affiche1",
       category: "affiches",
       title: "Affiche Officielle & Dépliant",
@@ -1439,14 +1416,6 @@ function JangumJigeenModal({ isOpen, onClose }: JangumJigeenModalProps) {
         "« Chaque femme mérite d'apprendre — Éduquer · Inspirer · Instruire · Réussir »",
       src: jangumFlyerMockup,
       desc: "Support visuel percutant mettant en avant les piliers du programme (Éduquer, Inspirer, Instruire, Réussir) et les coordonnées de contact.",
-    },
-    {
-      id: "kakemono",
-      category: "affiches",
-      title: "Kakémono / Roll-up Événementiel",
-      subtitle: "Support vertical grand format pour conférences & salons",
-      src: jangumKakemono,
-      desc: "Bannière verticale pour salons professionnels, cérémonies de remise de diplômes et événements de sensibilisation.",
     },
     {
       id: "facture",
@@ -1486,10 +1455,10 @@ function JangumJigeenModal({ isOpen, onClose }: JangumJigeenModalProps) {
           <div>
             <div className="flex items-center gap-2 mb-2">
               <span className="text-[10px] font-semibold tracking-wider uppercase px-2.5 py-0.5 rounded-full bg-brand-blue/20 text-brand-blue border border-brand-blue/30">
-                Branding & Communication
+                Affiches & Papeterie
               </span>
               <span className="text-[10px] font-semibold tracking-wider uppercase px-2.5 py-0.5 rounded-full bg-brand-green/20 text-brand-green border border-brand-green/30">
-                6 Supports Réalisés
+                4 Supports Réalisés
               </span>
             </div>
             <h2
@@ -1502,9 +1471,9 @@ function JangumJigeenModal({ isOpen, onClose }: JangumJigeenModalProps) {
               </span>
             </h2>
             <p className="text-gray-400 text-xs sm:text-sm mt-1 max-w-2xl leading-relaxed">
-              Création complète de l&apos;identité visuelle, charte graphique Poppins,
-              affiches, kakémono, flyer A4, carte de visite et modélisation des documents
-              administratifs et factures.
+              Création des supports de communication grand format, affiches de
+              campagne, flyer promotionnel A4, carte de visite et modélisation de la
+              facture administrative officielle.
             </p>
           </div>
 
@@ -1532,9 +1501,8 @@ function JangumJigeenModal({ isOpen, onClose }: JangumJigeenModalProps) {
         {/* Tab filters */}
         <div className="px-6 sm:px-8 pt-4 pb-2 bg-gray-50 border-b border-gray-100 flex flex-wrap gap-2">
           {[
-            { id: "all", label: "Tous les supports (6)" },
-            { id: "branding", label: "Brand Guidelines" },
-            { id: "affiches", label: "Affiches & Kakémono (3)" },
+            { id: "all", label: "Tous les supports (4)" },
+            { id: "affiches", label: "Affiches & Flyers (2)" },
             { id: "papeterie", label: "Papeterie & Facture (2)" },
           ].map((t) => (
             <button
@@ -1612,7 +1580,7 @@ function JangumJigeenModal({ isOpen, onClose }: JangumJigeenModalProps) {
           <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
               <h4 className="font-display font-semibold text-gray-900 text-sm sm:text-base">
-                Charte Graphique Jangum Jigeen
+                Univers Graphique Jangum Jigeen
               </h4>
               <p className="text-xs text-gray-500 mt-0.5">
                 Typographie principale : <strong>Poppins</strong> · Palette de
@@ -1693,8 +1661,8 @@ function Projects() {
       num: "02",
       title: "Jëfandikoo",
       subtitle: "Produire · Transformer · Valoriser",
-      tags: ["Identité Visuelle", "Moodboard", "UX/UI", "Logos & Goodies"],
-      desc: "Conception complète de l'identité de marque, des 3 déclinaisons de logos (blanc, vert, jaune), du moodboard applicatif, des maquettes d'application mobile et des goodies personnalisés (badges, casquettes, tasses).",
+      tags: ["Identité Visuelle", "Moodboard", "3 Logos", "Goodies"],
+      desc: "Conception complète de l'identité de marque, des 3 déclinaisons de logos (blanc, vert, jaune), du moodboard applicatif et des goodies personnalisés (badges, casquettes, tasses, brouette).",
       accent: "green",
       live: true,
     },
@@ -1703,8 +1671,8 @@ function Projects() {
       num: "03",
       title: "Jangum Jigeen",
       subtitle: "Éduquer · Inspirer · Instruire · Réussir",
-      tags: ["Brand Guidelines", "Affiches", "Kakémono", "Papeterie"],
-      desc: "Création complète de l'univers de marque de Jangum Jigeen : Brand Guidelines Poppins, 2 affiches promotionnelles, kakémono événementiel et modélisation de la papeterie & facture officielle.",
+      tags: ["Affiches", "Flyer A4", "Papeterie", "Facture"],
+      desc: "Création des supports de communication visuelle de Jangum Jigeen : affiche officielle grand format, flyer promotionnel A4, carte de visite et modélisation de la facture administrative officielle.",
       accent: "blue",
       live: true,
     },
@@ -1833,22 +1801,20 @@ function Projects() {
                             </div>
                           </div>
 
-                          {/* App UI */}
+                          {/* Logo 3 */}
                           <div
                             onClick={() => setJefandikooModalOpen(true)}
-                            className="group/img relative rounded-xl overflow-hidden border border-gray-200 bg-gray-50 h-24 sm:h-28 p-1 flex items-center justify-center cursor-pointer hover:shadow-md transition-all duration-200"
-                            title="Application Mobile Smartphone"
+                            className="group/img relative rounded-xl overflow-hidden border border-gray-200 bg-[#FFC815] h-24 sm:h-28 p-2 flex items-center justify-center cursor-pointer hover:shadow-md transition-all duration-200"
+                            title="Logo Fond Jaune"
                           >
                             <img
-                              src={jefandikooTelephone}
-                              alt="Application Mobile Jefandikoo"
-                              className="w-full h-full object-contain group-hover/img:scale-105 transition-transform duration-300"
+                              src={jefandikooLogoYellow}
+                              alt="Logo Jefandikoo Fond Jaune"
+                              className="w-full h-auto max-h-16 object-contain group-hover/img:scale-110 transition-transform duration-300"
                               loading="lazy"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2">
-                              <span className="text-[10px] font-medium text-white">
-                                App Mobile
-                              </span>
+                            <div className="absolute bottom-1 right-1.5 text-[9px] text-gray-900/90 font-medium">
+                              Fond Jaune
                             </div>
                           </div>
 
@@ -1879,29 +1845,10 @@ function Projects() {
                       <div className="mt-5 pt-5 border-t border-gray-100">
                         <p className="text-[11px] font-semibold tracking-wider text-gray-400 uppercase mb-3 flex items-center gap-1.5">
                           <span className="w-1.5 h-1.5 rounded-full bg-brand-blue" />
-                          6 Supports créés (Brand Guidelines, 2 Affiches, Kakémono, Facture, Carte) :
+                          4 Supports créés (2 Affiches, Facture, Carte de visite) :
                         </p>
 
-                        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-3">
-                          {/* Brand Guidelines */}
-                          <div
-                            onClick={() => setJangumJigeenModalOpen(true)}
-                            className="group/img relative rounded-xl overflow-hidden border border-gray-200 bg-gray-50 h-24 sm:h-28 cursor-pointer hover:shadow-md transition-all duration-200"
-                            title="Brand Guidelines Jangum Jigeen"
-                          >
-                            <img
-                              src={jangumBrandGuidelines}
-                              alt="Brand Guidelines Jangum Jigeen"
-                              className="w-full h-full object-cover object-top group-hover/img:scale-105 transition-transform duration-300"
-                              loading="lazy"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent flex items-end p-2">
-                              <span className="text-[10px] font-medium text-white">
-                                Brand Guidelines
-                              </span>
-                            </div>
-                          </div>
-
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                           {/* Affiche 1 */}
                           <div
                             onClick={() => setJangumJigeenModalOpen(true)}
@@ -1940,30 +1887,11 @@ function Projects() {
                             </div>
                           </div>
 
-                          {/* Kakemono */}
-                          <div
-                            onClick={() => setJangumJigeenModalOpen(true)}
-                            className="group/img relative rounded-xl overflow-hidden border border-gray-200 bg-gray-50 h-24 sm:h-28 cursor-pointer hover:shadow-md transition-all duration-200"
-                            title="Kakémono Roll-up"
-                          >
-                            <img
-                              src={jangumKakemono}
-                              alt="Kakemono Jangum Jigeen"
-                              className="w-full h-full object-cover object-top group-hover/img:scale-105 transition-transform duration-300"
-                              loading="lazy"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent flex items-end p-2">
-                              <span className="text-[10px] font-medium text-white">
-                                Kakémono Roll-up
-                              </span>
-                            </div>
-                          </div>
-
                           {/* Facture */}
                           <div
                             onClick={() => setJangumJigeenModalOpen(true)}
-                            className="hidden lg:flex group/img relative rounded-xl overflow-hidden border border-gray-200 bg-gray-50 h-24 sm:h-28 cursor-pointer hover:shadow-md transition-all duration-200"
-                            title="Facture & Papeterie"
+                            className="group/img relative rounded-xl overflow-hidden border border-gray-200 bg-gray-50 h-24 sm:h-28 cursor-pointer hover:shadow-md transition-all duration-200"
+                            title="Facture & Modèle Administratif"
                           >
                             <img
                               src={jangumFactureMockup}
@@ -1973,7 +1901,26 @@ function Projects() {
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent flex items-end p-2">
                               <span className="text-[10px] font-medium text-white">
-                                Facture & Papeterie
+                                Facture Officielle
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Carte de visite */}
+                          <div
+                            onClick={() => setJangumJigeenModalOpen(true)}
+                            className="group/img relative rounded-xl overflow-hidden border border-gray-200 bg-gray-50 h-24 sm:h-28 cursor-pointer hover:shadow-md transition-all duration-200"
+                            title="Carte de Visite Professionnelle"
+                          >
+                            <img
+                              src={jangumCarteVisite}
+                              alt="Carte de Visite Jangum Jigeen"
+                              className="w-full h-full object-cover object-center group-hover/img:scale-105 transition-transform duration-300"
+                              loading="lazy"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent flex items-end p-2">
+                              <span className="text-[10px] font-medium text-white">
+                                Carte de Visite
                               </span>
                             </div>
                           </div>
@@ -2013,7 +1960,7 @@ function Projects() {
                             <circle cx="8.5" cy="8.5" r="1.5"></circle>
                             <polyline points="21 15 16 10 5 21"></polyline>
                           </svg>
-                          Voir les 10 visuels & logos
+                          Voir les visuels & logos
                         </>
                       ) : p.id === "jangum-jigeen" ? (
                         <>
@@ -2031,7 +1978,7 @@ function Projects() {
                             <circle cx="8.5" cy="8.5" r="1.5"></circle>
                             <polyline points="21 15 16 10 5 21"></polyline>
                           </svg>
-                          Voir les 6 réalisations
+                          Voir les 4 réalisations
                         </>
                       ) : (
                         <>
