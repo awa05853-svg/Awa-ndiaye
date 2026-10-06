@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef, ReactNode } from "react"
 
-// ─── Direct Asset Imports (Ensures 100% reliable bundling across all environments) ───
+// ─── Direct Asset Imports ───
 import profilePhoto from "./assets/profile.jpeg"
 import hackeusePhoto from "./assets/hackeuse-de-la-semaine.jpeg"
 import cvPdf from "./assets/CV_Awa_Ndiaye.pdf"
 
-// Jefandikoo assets (selected by user: Moodboard, 3 Logos, Badge, Casquette, Tasse, Brouette)
+// Jefandikoo assets (Moodboard, 3 Logos, Goodies: Badge, Casquette, Tasse, Brouette)
 import jefandikooMoodboard from "./assets/jefandikoo/moodboard.jpg"
 import jefandikooLogoWhite from "./assets/jefandikoo/logo-white.png"
 import jefandikooLogoGreen from "./assets/jefandikoo/logo-green.png"
@@ -15,11 +15,10 @@ import jefandikooCasquette from "./assets/jefandikoo/casquette.png"
 import jefandikooTasse from "./assets/jefandikoo/tasse.png"
 import jefandikooBrouette from "./assets/jefandikoo/brouette.jpg"
 
-// Jangum Jigeen assets (selected by user: 2 Affiches, Facture, Carte de visite)
+// Jangum Jigeen assets (2 Affiches, Facture)
 import jangumAfficheMockup from "./assets/jangum-jigeen/affiche-mockup.jpg"
 import jangumFlyerMockup from "./assets/jangum-jigeen/flyer-mockup.png"
 import jangumFactureMockup from "./assets/jangum-jigeen/facture-mockup.jpg"
-import jangumCarteVisite from "./assets/jangum-jigeen/carte-visite.png"
 
 // ─── Scroll animation wrapper ───────────────────────────────────────────────
 
@@ -714,7 +713,7 @@ function Services() {
     {
       num: "02",
       title: "Design digital & Communication",
-      desc: "Création d'identités visuelles, logos, affiches, dépliants, papeterie et goodies personnalisés.",
+      desc: "Création d'identités visuelles, logos, affiches promotionnelles, dépliants et goodies personnalisés.",
       Icon: BrushIcon,
     },
     {
@@ -1374,7 +1373,7 @@ interface JangumJigeenModalProps {
 
 function JangumJigeenModal({ isOpen, onClose }: JangumJigeenModalProps) {
   const [activeTab, setActiveTab] = useState<
-    "all" | "affiches" | "papeterie"
+    "all" | "affiches" | "facture"
   >("all")
   const [lightboxImg, setLightboxImg] = useState<{ src: string; title: string } | null>(
     null
@@ -1419,19 +1418,11 @@ function JangumJigeenModal({ isOpen, onClose }: JangumJigeenModalProps) {
     },
     {
       id: "facture",
-      category: "papeterie",
+      category: "facture",
       title: "Facture & Modèle Administratif",
       subtitle: "« S'inscrire pour s'inspirer, s'inspirer pour réussir »",
       src: jangumFactureMockup,
       desc: "Modélisation de la papeterie d'entreprise et des factures officielles avec charte graphique, tableau de prestations (Formation, Atelier, Accompagnement) et conditions de paiement.",
-    },
-    {
-      id: "carte-visite",
-      category: "papeterie",
-      title: "Carte de Visite Professionnelle",
-      subtitle: "Papeterie corporative officielle Jangum Jigeen",
-      src: jangumCarteVisite,
-      desc: "Carte de visite avec logo officiel, coordonnées de contact, réseau et charte graphique orange et noir.",
     },
   ]
 
@@ -1455,10 +1446,10 @@ function JangumJigeenModal({ isOpen, onClose }: JangumJigeenModalProps) {
           <div>
             <div className="flex items-center gap-2 mb-2">
               <span className="text-[10px] font-semibold tracking-wider uppercase px-2.5 py-0.5 rounded-full bg-brand-blue/20 text-brand-blue border border-brand-blue/30">
-                Affiches & Papeterie
+                Affiches & Facture
               </span>
               <span className="text-[10px] font-semibold tracking-wider uppercase px-2.5 py-0.5 rounded-full bg-brand-green/20 text-brand-green border border-brand-green/30">
-                4 Supports Réalisés
+                3 Réalisations
               </span>
             </div>
             <h2
@@ -1471,9 +1462,8 @@ function JangumJigeenModal({ isOpen, onClose }: JangumJigeenModalProps) {
               </span>
             </h2>
             <p className="text-gray-400 text-xs sm:text-sm mt-1 max-w-2xl leading-relaxed">
-              Création des supports de communication grand format, affiches de
-              campagne, flyer promotionnel A4, carte de visite et modélisation de la
-              facture administrative officielle.
+              Création des supports de communication visuelle grand format, affiches
+              promotionnelles et modélisation de la facture administrative officielle.
             </p>
           </div>
 
@@ -1501,9 +1491,9 @@ function JangumJigeenModal({ isOpen, onClose }: JangumJigeenModalProps) {
         {/* Tab filters */}
         <div className="px-6 sm:px-8 pt-4 pb-2 bg-gray-50 border-b border-gray-100 flex flex-wrap gap-2">
           {[
-            { id: "all", label: "Tous les supports (4)" },
+            { id: "all", label: "Tous les supports (3)" },
             { id: "affiches", label: "Affiches & Flyers (2)" },
-            { id: "papeterie", label: "Papeterie & Facture (2)" },
+            { id: "facture", label: "Facture Administrative (1)" },
           ].map((t) => (
             <button
               key={t.id}
@@ -1521,7 +1511,7 @@ function JangumJigeenModal({ isOpen, onClose }: JangumJigeenModalProps) {
 
         {/* Modal Body */}
         <div className="p-6 sm:p-8 overflow-y-auto space-y-8">
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredAssets.map((asset) => (
               <div
                 key={asset.id}
@@ -1576,15 +1566,14 @@ function JangumJigeenModal({ isOpen, onClose }: JangumJigeenModalProps) {
             ))}
           </div>
 
-          {/* Guidelines info card */}
+          {/* Info card */}
           <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
               <h4 className="font-display font-semibold text-gray-900 text-sm sm:text-base">
-                Univers Graphique Jangum Jigeen
+                Projet Jangum Jigeen
               </h4>
               <p className="text-xs text-gray-500 mt-0.5">
-                Typographie principale : <strong>Poppins</strong> · Palette de
-                marque : <strong>Orange Dynamique & Noir Élégance</strong>.
+                Communication visuelle · Typographie <strong>Poppins</strong> · Codes <strong>Orange &amp; Noir</strong>.
               </p>
             </div>
             <span className="text-xs font-semibold px-3 py-1.5 rounded-full bg-white border border-gray-200 text-gray-700 shrink-0">
@@ -1671,8 +1660,8 @@ function Projects() {
       num: "03",
       title: "Jangum Jigeen",
       subtitle: "Éduquer · Inspirer · Instruire · Réussir",
-      tags: ["Affiches", "Flyer A4", "Papeterie", "Facture"],
-      desc: "Création des supports de communication visuelle de Jangum Jigeen : affiche officielle grand format, flyer promotionnel A4, carte de visite et modélisation de la facture administrative officielle.",
+      tags: ["Affiches", "Flyer A4", "Facture"],
+      desc: "Création des supports de communication visuelle de Jangum Jigeen : affiche officielle grand format, flyer promotionnel A4 et modélisation de la facture administrative officielle.",
       accent: "blue",
       live: true,
     },
@@ -1845,10 +1834,10 @@ function Projects() {
                       <div className="mt-5 pt-5 border-t border-gray-100">
                         <p className="text-[11px] font-semibold tracking-wider text-gray-400 uppercase mb-3 flex items-center gap-1.5">
                           <span className="w-1.5 h-1.5 rounded-full bg-brand-blue" />
-                          4 Supports créés (2 Affiches, Facture, Carte de visite) :
+                          3 Supports créés (2 Affiches, Facture) :
                         </p>
 
-                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                           {/* Affiche 1 */}
                           <div
                             onClick={() => setJangumJigeenModalOpen(true)}
@@ -1902,25 +1891,6 @@ function Projects() {
                             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent flex items-end p-2">
                               <span className="text-[10px] font-medium text-white">
                                 Facture Officielle
-                              </span>
-                            </div>
-                          </div>
-
-                          {/* Carte de visite */}
-                          <div
-                            onClick={() => setJangumJigeenModalOpen(true)}
-                            className="group/img relative rounded-xl overflow-hidden border border-gray-200 bg-gray-50 h-24 sm:h-28 cursor-pointer hover:shadow-md transition-all duration-200"
-                            title="Carte de Visite Professionnelle"
-                          >
-                            <img
-                              src={jangumCarteVisite}
-                              alt="Carte de Visite Jangum Jigeen"
-                              className="w-full h-full object-cover object-center group-hover/img:scale-105 transition-transform duration-300"
-                              loading="lazy"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent flex items-end p-2">
-                              <span className="text-[10px] font-medium text-white">
-                                Carte de Visite
                               </span>
                             </div>
                           </div>
@@ -1978,7 +1948,7 @@ function Projects() {
                             <circle cx="8.5" cy="8.5" r="1.5"></circle>
                             <polyline points="21 15 16 10 5 21"></polyline>
                           </svg>
-                          Voir les 4 réalisations
+                          Voir les 3 réalisations
                         </>
                       ) : (
                         <>
